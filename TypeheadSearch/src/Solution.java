@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-
-
 public class Solution {
 
 	HashMap<String,Item> itemCollection=new HashMap<String,Item>();
