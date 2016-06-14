@@ -1,4 +1,4 @@
-package srcReloaded;
+package srcReloaded.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,15 +61,15 @@ public class TypeAheadService {
 	private boolean isCaseInsensitivePrefix(String word, String data) {
 		String[] dataArray = data.split(" ");
 		for (String token : dataArray) {
-			if (token.startsWith(word)) {
+			if (token.toLowerCase().startsWith(word.toLowerCase())) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public List<Item> wQuery(int numOfResults, Map<Type, Float> boosts, String queryStr) {
-		comparator.setBoosts(boosts);
+	public List<Item> wQuery(int numOfResults, Map<String, Float> boostsMap, String queryStr) {
+		comparator.setBoosts(boostsMap);
 		List<Item> result = query(numOfResults, queryStr);
 		comparator.setBoosts(null);
 		return result;

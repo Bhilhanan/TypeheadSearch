@@ -1,11 +1,11 @@
-package srcReloaded;
+package srcReloaded.service;
 
 import java.util.Comparator;
 import java.util.Map;
 
 public class ItemComparator implements Comparator<Item> {
 
-	private Map<Type, Float> boosts;
+	private Map<String, Float> boosts;
 
 	@Override
 	public int compare(Item o1, Item o2) {
@@ -19,13 +19,17 @@ public class ItemComparator implements Comparator<Item> {
 		if (boosts == null) {
 			return o1.getScore();
 		}
-		if(!boosts.containsKey(o1.getType())){
-			return o1.getScore();
-		}
-		return o1.getScore()*boosts.get(o1.getType());
+		return o1.getScore() * getBoost(o1.getType().name())*getBoost(o1.getId());
 	}
 
-	public void setBoosts(Map<Type, Float> boosts) {
-		this.boosts = boosts;
+	private float getBoost(String key) {
+		if(boosts.containsKey(key)){
+			return boosts.get(key);
+		}
+		return 1f;
+	}
+
+	public void setBoosts(Map<String, Float> boostsMap) {
+		this.boosts = boostsMap;
 	}
 }
